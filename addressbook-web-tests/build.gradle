@@ -1,0 +1,32 @@
+group 'addressbook-web-tests'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'org.testng:testng:6.9.13.6'
+    compile 'org.seleniumhq.selenium:selenium-java: 3.0.1'
+}
+group 'addressbook-web-tests'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'org.seleniumhq.selenium:selenium-java:3.0.1'
+
+}
