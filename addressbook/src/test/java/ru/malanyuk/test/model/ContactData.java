@@ -1,4 +1,4 @@
-package ru.malanyuk.test;
+package ru.malanyuk.test.model;
 
 public class ContactData {
     private final String firstname;

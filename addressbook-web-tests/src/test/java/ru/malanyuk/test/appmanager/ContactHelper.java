@@ -1,0 +1,38 @@
+package ru.malanyuk.test.appmanager;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.malanyuk.test.model.ContactData;
+
+/**
+ * Created by ahomia on 12.11.2016.
+ */
+public class ContactHelper extends HelperBase{
+private FirefoxDriver wd;
+    public ContactHelper(FirefoxDriver wd) {
+        super(wd);
+    }
+
+    public void fillContactForm(ContactData contactData) {
+        type(By.className("firstname"), contactData.getFirstname());
+        type(By.name("lastname"), contactData.getLastname());
+        type(By.name("nickname"), contactData.getNickname());
+        type(By.name("company"), contactData.getCompany());
+        type(By.name("mobile"), contactData.getMobile());
+        type(By.name("email"), contactData.getEmail());
+        selectDropdown(contactData.getBithdayDay());
+        selectDropdown(contactData.getBithdayMounth());
+        type(By.name("byear"), contactData.getBithdayYear());
+    }
+
+
+
+    public void initAddContact() {
+
+        click(By.linkText("add new"));
+    }
+
+    public void sumbitContactCreating() {
+        click(By.xpath("//div[@id='content']/form/input[21]"));
+    }
+}
