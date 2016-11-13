@@ -2,6 +2,7 @@ package ru.malanyuk.test.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
@@ -14,19 +15,21 @@ public class HelperBase {
         this.wd = wd;
     }
 
-    protected void selectDropdown(String parameter) {
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[" + parameter + "]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[" + parameter + "]")).click();
+    public void selectDropdown(String parameter) {
+        if (!findElement(parameter).isSelected()) {
+            findElement(parameter).click();
         }
     }
 
+    private WebElement findElement(String parameter) {
+        return wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[" + parameter + "]"));
+    }
+
     public void type(By locator, String text) {
-        wd.findElement(locator).click();
-        wd.findElement(locator).clear();
         wd.findElement(locator).sendKeys(text);
     }
 
-    protected void click(By locator) {
+    public void click(By locator) {
         wd.findElement(locator).click();
     }
     public  boolean isAlertPresent() {

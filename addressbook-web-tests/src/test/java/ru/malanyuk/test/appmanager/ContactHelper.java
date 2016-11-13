@@ -8,6 +8,7 @@ import ru.malanyuk.test.model.ContactData;
  * Created by ahomia on 12.11.2016.
  */
 public class ContactHelper extends HelperBase{
+
 private FirefoxDriver wd;
     public ContactHelper(FirefoxDriver wd) {
         super(wd);
@@ -33,6 +34,6 @@ private FirefoxDriver wd;
     }
 
     public void sumbitContactCreating() {
-        click(By.xpath("//div[@id='content']/form/input[21]"));
+        click(By.xpath("//*[@id='content']/*/input[@value='Enter']"));
     }
 }
