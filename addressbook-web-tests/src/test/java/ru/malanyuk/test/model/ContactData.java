@@ -11,6 +11,7 @@ public class ContactData {
     private final String bithdayMounth;
     private final String bithdayYear;
 
+
     public ContactData(String firstname, String lastname, String nickname, String company, String mobile, String email, String bithdayDay, String bithdayMounth, String bithdayYear) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -21,6 +22,7 @@ public class ContactData {
         this.bithdayDay = bithdayDay;
         this.bithdayMounth = bithdayMounth;
         this.bithdayYear = bithdayYear;
+
     }
 
     public String getFirstname() {
@@ -58,4 +60,5 @@ public class ContactData {
     public String getBithdayYear() {
         return bithdayYear;
     }
+
 }

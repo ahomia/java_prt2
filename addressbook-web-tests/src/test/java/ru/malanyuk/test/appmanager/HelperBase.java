@@ -5,6 +5,9 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by ahomia on 13.11.2016.
@@ -28,8 +31,8 @@ public class HelperBase {
 
     public void type(By locator, String text) {
 
-        if(text!=null){
-            String existingText=wd.findElement(locator).getAttribute("value");
+        if (text != null) {
+            String existingText = wd.findElement(locator).getAttribute("value");
             if (!text.equals(existingText)) {
                 wd.findElement(locator).sendKeys(text);
             }
@@ -39,7 +42,8 @@ public class HelperBase {
     public void click(By locator) {
         wd.findElement(locator).click();
     }
-    public  boolean isAlertPresent() {
+
+    public boolean isAlertPresent() {
         try {
             wd.switchTo().alert();
             return true;
@@ -47,8 +51,18 @@ public class HelperBase {
             return false;
         }
     }
-    public void closeAlert(){
+
+    public void closeAlert() {
+
         wd.switchTo().alert().accept();
     }
 
+    protected boolean isElementPresent(By locator) {
+        try {
+            wd.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
 }

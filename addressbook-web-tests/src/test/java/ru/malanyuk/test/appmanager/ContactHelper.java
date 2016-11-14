@@ -15,8 +15,8 @@ private WebDriver wd;
         super(wd);
     }
 
-    public void fillContactForm(ContactData contactData) {
-        type(By.className("firstname"), contactData.getFirstname());
+    public void fillContactForm(ContactData contactData,boolean creating) {
+        type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("nickname"), contactData.getNickname());
         type(By.name("company"), contactData.getCompany());
