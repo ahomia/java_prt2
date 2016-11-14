@@ -15,6 +15,30 @@
         </option>
         <option name="useAutoImport" value="true" />
       </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="createEmptyContentRootDirectories" value="true" />
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/../ex-3" />
+        <option name="gradleHome" value="$USER_HOME$/Downloads/gradle-3.1-all/gradle-3.1" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/../ex-3" />
+          </set>
+        </option>
+        <option name="useAutoImport" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="createEmptyContentRootDirectories" value="true" />
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/../sandbox" />
+        <option name="gradleHome" value="$USER_HOME$/Downloads/gradle-3.1-all/gradle-3.1" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/../sandbox" />
+          </set>
+        </option>
+        <option name="useAutoImport" value="true" />
+      </GradleProjectSettings>
     </option>
   </component>
 </project>

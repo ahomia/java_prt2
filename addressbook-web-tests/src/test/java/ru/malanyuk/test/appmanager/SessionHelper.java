@@ -1,14 +1,15 @@
 package ru.malanyuk.test.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by ahomia on 13.11.2016.
  */
 public class SessionHelper extends HelperBase{
-    private FirefoxDriver wd;
-    public SessionHelper(FirefoxDriver wd) {
+    private WebDriver wd;
+    public SessionHelper(WebDriver wd) {
         super (wd);
     }
     public void login(String username, String password) {

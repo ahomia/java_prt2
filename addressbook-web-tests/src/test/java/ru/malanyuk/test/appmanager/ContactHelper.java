@@ -1,6 +1,7 @@
 package ru.malanyuk.test.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.malanyuk.test.model.ContactData;
 
@@ -9,8 +10,8 @@ import ru.malanyuk.test.model.ContactData;
  */
 public class ContactHelper extends HelperBase{
 
-private FirefoxDriver wd;
-    public ContactHelper(FirefoxDriver wd) {
+private WebDriver wd;
+    public ContactHelper(WebDriver wd) {
         super(wd);
     }
 

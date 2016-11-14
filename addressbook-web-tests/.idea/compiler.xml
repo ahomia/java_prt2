@@ -21,6 +21,8 @@
     <bytecodeTargetLevel>
       <module name="addressbook-web-tests_main" target="1.5" />
       <module name="addressbook-web-tests_test" target="1.5" />
+      <module name="ex-3_main" target="1.5" />
+      <module name="ex-3_test" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

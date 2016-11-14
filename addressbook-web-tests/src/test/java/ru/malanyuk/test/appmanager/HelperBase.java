@@ -2,6 +2,7 @@ package ru.malanyuk.test.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -9,9 +10,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  * Created by ahomia on 13.11.2016.
  */
 public class HelperBase {
-    private FirefoxDriver wd;
+    private WebDriver wd;
 
-    public HelperBase(FirefoxDriver wd) {
+    public HelperBase(WebDriver wd) {
         this.wd = wd;
     }
 
@@ -26,7 +27,13 @@ public class HelperBase {
     }
 
     public void type(By locator, String text) {
-        wd.findElement(locator).sendKeys(text);
+
+        if(text!=null){
+            String existingText=wd.findElement(locator).getAttribute("value");
+            if (!text.equals(existingText)) {
+                wd.findElement(locator).sendKeys(text);
+            }
+        }
     }
 
     public void click(By locator) {

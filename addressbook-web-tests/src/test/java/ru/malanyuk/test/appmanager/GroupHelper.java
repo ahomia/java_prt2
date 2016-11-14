@@ -1,6 +1,7 @@
 package ru.malanyuk.test.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.malanyuk.test.model.GroupDate;
 
@@ -8,10 +9,10 @@ import ru.malanyuk.test.model.GroupDate;
  * Created by ahomia on 12.11.2016.
  */
 public class GroupHelper extends HelperBase {
-    private FirefoxDriver wd;
+    private WebDriver wd;
 
 
-    public GroupHelper(FirefoxDriver wd) {
+    public GroupHelper(WebDriver wd) {
         super(wd);
     }
 
