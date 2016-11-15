@@ -22,8 +22,8 @@ private WebDriver wd;
         type(By.name("company"), contactData.getCompany());
         type(By.name("mobile"), contactData.getMobile());
         type(By.name("email"), contactData.getEmail());
-        selectDropdown(contactData.getBithdayDay());
-        selectDropdown(contactData.getBithdayMounth());
+        selectDropdown(By.xpath("bday"),contactData.getBithdayDay());
+        selectDropdown(By.name("bmonth"),contactData.getBithdayMounth());
         type(By.name("byear"), contactData.getBithdayYear());
     }
 

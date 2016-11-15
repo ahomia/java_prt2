@@ -19,22 +19,24 @@ public class HelperBase {
         this.wd = wd;
     }
 
-    public void selectDropdown(String parameter) {
-        if (!findElement(parameter).isSelected()) {
-            findElement(parameter).click();
+    public void selectDropdown(By locator, String text) {
+        if (isElementPresent(locator)) {
+            new Select(wd.findElement(locator)).selectByValue(text);
         }
     }
 
-    private WebElement findElement(String parameter) {
+   /* private WebElement findElement(String parameter) {
         return wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[" + parameter + "]"));
     }
-
+*/
     public void type(By locator, String text) {
 
         if (text != null) {
-            String existingText = wd.findElement(locator).getAttribute("value");
+            WebElement element=wd.findElement(locator);
+            String existingText = element.getAttribute("value");
             if (!text.equals(existingText)) {
-                wd.findElement(locator).sendKeys(text);
+                element.clear();
+                element.sendKeys(text);
             }
         }
     }
