@@ -33,10 +33,12 @@ public class GroupHelper extends HelperBase {
     }
 
     public void initGroupCreating() {
+        
         click(By.name("new"));
     }
 
     public void deleteSelectedGroups() {
+        
         click(By.xpath("//div[@id='content']/form/input[5]"));
     }
 
@@ -47,10 +49,23 @@ public class GroupHelper extends HelperBase {
 
 
     public void initGroupModification() {
+        
         click(By.name("edit"));
     }
 
     public void submitGroupModification() {
+        
         click(By.name("update"));
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public void createGroup(GroupDate group) {
+        initGroupCreating();
+        fillGroupForm(group);
+    submitGroupCreating();
+        returnGroupPage();
     }
 }

@@ -10,6 +10,9 @@ public class GroupModificationTests extends TestBase {
     @Test
     public void testGroupModification() {
         app.getNavigationHelper().goToGroupPage();
+        if(!app.getGroupHelper().isThereAGroup()){
+            app.getGroupHelper().createGroup(new GroupDate("marina", "malanyuk", "mama"));
+        }
         app.getGroupHelper().selectGroup();
         app.getGroupHelper().initGroupModification();
         app.getGroupHelper().fillGroupForm(new GroupDate("marina2", "malanyu2k", "m2"));

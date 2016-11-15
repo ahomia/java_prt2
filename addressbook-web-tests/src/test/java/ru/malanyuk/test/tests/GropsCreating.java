@@ -9,10 +9,8 @@ public class GropsCreating extends TestBase {
     public void testGropsCreating() {
 
         app.getNavigationHelper().goToGroupPage();
-        app.getGroupHelper().initGroupCreating();
-        app.getGroupHelper().fillGroupForm(new GroupDate("marina", "malanyuk", "mama"));
-        app.getGroupHelper().submitGroupCreating();
-        app.getGroupHelper().returnGroupPage();
+        app.getGroupHelper().createGroup(new GroupDate("marina", "malanyuk", "mama"));
+
     }
 
 }

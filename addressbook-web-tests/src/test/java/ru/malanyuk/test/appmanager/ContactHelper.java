@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.malanyuk.test.model.ContactData;
+import ru.malanyuk.test.model.GroupDate;
 
 /**
  * Created by ahomia on 12.11.2016.
@@ -58,4 +59,25 @@ private WebDriver wd;
     public void sumbitContactUpdating() {
         click(By.xpath("//*[@id='content']/*/input[@value='Update']"));
     }
+
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
+    public void goHomePage() {
+        if(isElementPresent(By.id("maintable"))){
+
+            return;
+        }else{
+            click(By.linkText("home"));
+        }
+    }
+
+    public void createContact(ContactData contact) {
+       initAddContact();
+        fillContactForm(contact,false);
+        sumbitContactCreating();
+        goHomePage();
+    }
+
 }
