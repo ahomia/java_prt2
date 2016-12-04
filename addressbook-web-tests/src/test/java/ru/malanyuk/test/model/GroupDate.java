@@ -1,15 +1,31 @@
 package ru.malanyuk.test.model;
 
 public class GroupDate {
-    private final String groupName;
-    private final String header;
-    private final String footer;
 
-    public void setId(int id) {
+
+    private  String groupName;
+    private  String header;
+    private  String footer;
+    private int id=Integer.MAX_VALUE;
+
+    public GroupDate withId(int id) {
         this.id = id;
+        return this;
+    }
+    public GroupDate withGroupName(String groupName) {
+        this.groupName = groupName;
+        return this;
     }
 
-    private int id;
+    public GroupDate withHeader(String header) {
+        this.header = header;
+        return this;
+    }
+
+    public GroupDate withFooter(String footer) {
+        this.footer = footer;
+        return this;
+    }
 
     @Override
     public String toString() {
@@ -23,12 +39,7 @@ public class GroupDate {
         return id;
     }
 
-    public GroupDate(int id, String groupName, String header, String footer) {
-        this.groupName = groupName;
-        this.header = header;
-        this.footer = footer;
-        this.id = id;
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -46,13 +57,7 @@ public class GroupDate {
         return groupName != null ? groupName.hashCode() : 0;
     }
 
-    public GroupDate(String groupName, String header, String footer) {
-        this.id = Integer.MAX_VALUE;
-        this.groupName = groupName;
-        this.header = header;
-        this.footer = footer;
 
-    }
 
     public String getGroupName() {
         return groupName;

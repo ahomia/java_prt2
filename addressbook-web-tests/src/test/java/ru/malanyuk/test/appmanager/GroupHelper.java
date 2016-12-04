@@ -64,18 +64,31 @@ wd.findElements(By.name("selected[]")).get(index).click();
         return isElementPresent(By.name("selected[]"));
     }
 
-    public void createGroup(GroupDate group) {
+    public void create(GroupDate group) {
         initGroupCreating();
         fillGroupForm(group);
     submitGroupCreating();
         returnGroupPage();
     }
+    public void modify(int index, GroupDate group) {
+        selectGroup(index);
+        initGroupModification();
+       fillGroupForm(group);
+        submitGroupModification();
+        returnGroupPage();
+    }
+    public void delete(int index) {
+      selectGroup(index);
+        deleteSelectedGroups();
+       returnGroupPage();
+    }
+
 
     public int getGroupCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupDate> getGroupList() {
+    public List<GroupDate> list() {
         List<GroupDate> groups=new ArrayList<GroupDate>();
         List<WebElement> elements=wd.findElements(By.cssSelector("span.group"));
         for (WebElement l: elements){

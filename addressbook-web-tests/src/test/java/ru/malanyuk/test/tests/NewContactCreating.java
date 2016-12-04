@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import ru.malanyuk.test.model.ContactData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class NewContactCreating extends TestBase {
@@ -13,12 +12,12 @@ public class NewContactCreating extends TestBase {
     @Test
     public void NewContactCreating() {
 
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().initAddContact();
-        ContactData contact=new ContactData("Marina", "Malaniuk", "Ahomia", "Artezio", "89873862557", "marina.malaniuk@gmail.com", "3", "January", "1992");
-        app.getContactHelper().createContact(contact);
-        app.getNavigationHelper().gotoHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
+        app.contact().initAddContact();
+        ContactData contact=new ContactData().withFirstname("Marina").withLastname("Malaniuk").withNickname( "Ahomia").withCompany("Artezio").withMobile("89873862557").withEmail("marina.malaniuk@gmail.com").withBithdayDay("3").withBithdayMounth("January").withBithdayYear("1992");
+        app.contact().create(contact);
+       // app.goTo().HomePage();
+        List<ContactData> after = app.contact().list();
 
         //contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(),o2.getId())).get().getId());
         before.add(contact);

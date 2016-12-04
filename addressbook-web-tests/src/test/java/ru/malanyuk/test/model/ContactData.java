@@ -1,16 +1,67 @@
 package ru.malanyuk.test.model;
 
 public class ContactData {
-    private final String firstname;
-    private final String lastname;
-    private final String nickname;
-    private final String company;
-    private final String mobile;
-    private final String email;
-    private final String bithdayDay;
-    private final String bithdayMounth;
-    private final String bithdayYear;
-    private int id;
+    private String firstname;
+    private String lastname;
+    private String nickname;
+    private String company;
+    private String mobile;
+    private String email;
+    private String bithdayDay;
+    private String bithdayMounth;
+    private String bithdayYear;
+    private int id = Integer.MAX_VALUE;
+
+    public ContactData withFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
+
+    public ContactData withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withNickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
+    public ContactData withCompany(String company) {
+        this.company = company;
+        return this;
+    }
+
+    public ContactData withMobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withBithdayDay(String bithdayDay) {
+        this.bithdayDay = bithdayDay;
+        return this;
+    }
+
+    public ContactData withBithdayMounth(String bithdayMounth) {
+        this.bithdayMounth = bithdayMounth;
+        return this;
+    }
+
+    public ContactData withBithdayYear(String bithdayYear) {
+        this.bithdayYear = bithdayYear;
+        return this;
+    }
+
+    public ContactData withId(int id) {
+        this.id = id;
+        return this;
+    }
+
 
     @Override
     public String toString() {
@@ -20,20 +71,6 @@ public class ContactData {
                 '}';
     }
 
-    public ContactData(int id, String firstname, String lastname, String nickname, String company, String mobile, String email, String bithdayDay, String bithdayMounth, String bithdayYear) {
-        this.id=id;
-        this.firstname = firstname;
-
-        this.lastname = lastname;
-        this.nickname = nickname;
-        this.company = company;
-        this.mobile = mobile;
-        this.email = email;
-        this.bithdayDay = bithdayDay;
-        this.bithdayMounth = bithdayMounth;
-        this.bithdayYear = bithdayYear;
-
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -54,20 +91,6 @@ public class ContactData {
         return result;
     }
 
-    public ContactData(String firstname, String lastname, String nickname, String company, String mobile, String email, String bithdayDay, String bithdayMounth, String bithdayYear) {
-        this.id=Integer.MAX_VALUE;
-        this.firstname = firstname;
-
-        this.lastname = lastname;
-        this.nickname = nickname;
-        this.company = company;
-        this.mobile = mobile;
-        this.email = email;
-        this.bithdayDay = bithdayDay;
-        this.bithdayMounth = bithdayMounth;
-        this.bithdayYear = bithdayYear;
-
-    }
 
     public String getFirstname() {
         return firstname;
@@ -105,7 +128,9 @@ public class ContactData {
         return bithdayYear;
     }
 
-    public int getId(){return id;}
+    public int getId() {
+        return id;
+    }
 
     public void setId(int id) {
         this.id = id;
