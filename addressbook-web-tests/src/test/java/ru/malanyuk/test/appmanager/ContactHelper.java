@@ -2,16 +2,22 @@ package ru.malanyuk.test.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import ru.malanyuk.test.model.ContactData;
 import ru.malanyuk.test.model.GroupDate;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 /**
  * Created by ahomia on 12.11.2016.
  */
 public class ContactHelper extends HelperBase{
 
-private WebDriver wd;
+
     public ContactHelper(WebDriver wd) {
         super(wd);
     }
@@ -39,8 +45,9 @@ private WebDriver wd;
         click(By.xpath("//*[@id='content']/*/input[@value='Enter']"));
     }
 
-    public void selectContact() {
-        click(By.name("selected[]"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
+
     }
 
     public void deleteSelectedContact() {
@@ -52,8 +59,9 @@ private WebDriver wd;
     }
 
 
-    public void editContact() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    public void editContact(int index) {
+
+        wd.findElements(By.cssSelector("img[alt='Edit']")).get(index).click();
     }
 
     public void sumbitContactUpdating() {
@@ -78,6 +86,24 @@ private WebDriver wd;
         fillContactForm(contact,false);
         sumbitContactCreating();
         goHomePage();
+    }
+
+    public int getContactCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<ContactData> getContactList() {
+        //WebElement selected = wait.until(presenceOfElementLocated(By.name("entry")));
+        List<ContactData> contact=new ArrayList<ContactData>();
+        List<WebElement> elements=wd.findElements(By.xpath(".//*[@name='entry']"));;
+        for (WebElement element: elements){
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            String firstname = element.findElement(By.xpath(".//td[3]")).getText();
+            String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+            ContactData person=new ContactData(id,firstname,lastname,null,null,null,null,null,null,null);
+            contact.add(person);
+        }
+        return contact;
     }
 
 }

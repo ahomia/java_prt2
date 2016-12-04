@@ -10,10 +10,51 @@ public class ContactData {
     private final String bithdayDay;
     private final String bithdayMounth;
     private final String bithdayYear;
+    private int id;
 
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "firstname='" + firstname + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
+
+    public ContactData(int id, String firstname, String lastname, String nickname, String company, String mobile, String email, String bithdayDay, String bithdayMounth, String bithdayYear) {
+        this.id=id;
+        this.firstname = firstname;
+
+        this.lastname = lastname;
+        this.nickname = nickname;
+        this.company = company;
+        this.mobile = mobile;
+        this.email = email;
+        this.bithdayDay = bithdayDay;
+        this.bithdayMounth = bithdayMounth;
+        this.bithdayYear = bithdayYear;
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        return firstname != null ? firstname.equals(that.firstname) : that.firstname == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return firstname != null ? firstname.hashCode() : 0;
+    }
 
     public ContactData(String firstname, String lastname, String nickname, String company, String mobile, String email, String bithdayDay, String bithdayMounth, String bithdayYear) {
+        this.id=Integer.MAX_VALUE;
         this.firstname = firstname;
+
         this.lastname = lastname;
         this.nickname = nickname;
         this.company = company;
@@ -61,4 +102,9 @@ public class ContactData {
         return bithdayYear;
     }
 
+    public int getId(){return id;}
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

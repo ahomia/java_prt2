@@ -8,16 +8,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by ahomia on 13.11.2016.
  */
 public class HelperBase {
-    private WebDriver wd;
+    public WebDriver wd;
+    protected WebDriverWait wait;
 
     public HelperBase(WebDriver wd) {
         this.wd = wd;
+        this.wait = new WebDriverWait(wd, 10);
     }
+
+
 
     public void selectDropdown(By locator, String text) {
         if (isElementPresent(locator)) {

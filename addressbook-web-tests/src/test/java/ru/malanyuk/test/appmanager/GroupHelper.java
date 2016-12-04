@@ -2,14 +2,16 @@ package ru.malanyuk.test.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebElement;
 import ru.malanyuk.test.model.GroupDate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ahomia on 12.11.2016.
  */
 public class GroupHelper extends HelperBase {
-    private WebDriver wd;
 
 
     public GroupHelper(WebDriver wd) {
@@ -42,9 +44,9 @@ public class GroupHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[5]"));
     }
 
-    public void selectGroup() {
-
-        click(By.name("selected[]"));
+    public void selectGroup(int index) {
+wd.findElements(By.name("selected[]")).get(index).click();
+       // click(By.name("selected[]"));
     }
 
 
@@ -67,5 +69,21 @@ public class GroupHelper extends HelperBase {
         fillGroupForm(group);
     submitGroupCreating();
         returnGroupPage();
+    }
+
+    public int getGroupCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<GroupDate> getGroupList() {
+        List<GroupDate> groups=new ArrayList<GroupDate>();
+        List<WebElement> elements=wd.findElements(By.cssSelector("span.group"));
+        for (WebElement l: elements){
+            String name=l.getText();
+            int id=Integer.parseInt(l.findElement(By.tagName("input")).getAttribute("value"));
+            GroupDate group=new GroupDate(id,name,null,null);
+            groups.add(group);
+        }
+        return groups;
     }
 }
