@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import ru.malanyuk.test.model.ContactData;
 import ru.malanyuk.test.model.Contacts;
 import ru.malanyuk.test.model.GroupDate;
+import ru.malanyuk.test.model.Groups;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -91,6 +92,7 @@ public class ContactHelper extends HelperBase{
        initAddContact();
         fillContactForm(contact,false);
         sumbitContactCreating();
+        contactCashe =null;
         gotoHomePage();
     }
     public void modify(int index, ContactData contact) {
@@ -103,6 +105,7 @@ public class ContactHelper extends HelperBase{
         editContactById(contact.getId());
         fillContactForm(contact,false);
         sumbitContactUpdating();
+        contactCashe =null;
         gotoHomePage();
     }
     public void delete(int index) {
@@ -115,6 +118,7 @@ public class ContactHelper extends HelperBase{
         selectContactById(contact.getId());
         deleteSelectedContact();
         confirmDeletingContact();
+        contactCashe =null;
         gotoHomePage();
     }
 
@@ -135,17 +139,21 @@ public class ContactHelper extends HelperBase{
         }
         return contact;
     }
+    private Contacts contactCashe =null;
     public Contacts all() {
+        if (contactCashe != null){
+            return new Contacts(contactCashe);
+        }
         //WebElement selected = wait.until(presenceOfElementLocated(By.name("entry")));
-        Contacts contact=new Contacts();
+        contactCashe=new Contacts();
         List<WebElement> elements=wd.findElements(By.xpath(".//*[@name='entry']"));;
         for (WebElement element: elements){
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String firstname = element.findElement(By.xpath(".//td[3]")).getText();
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
-            contact.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+            contactCashe.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
-        return contact;
+        return new Contacts(contactCashe);
     }
 
 

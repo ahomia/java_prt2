@@ -22,7 +22,7 @@ public class Groups extends ForwardingSet<GroupDate> {
 
     @Override
     protected Set<GroupDate> delegate() {
-        return null;
+        return delegate;
     }
 
     public Groups withAdded(GroupDate group){

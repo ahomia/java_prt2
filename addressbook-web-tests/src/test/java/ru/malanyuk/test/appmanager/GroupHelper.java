@@ -74,6 +74,7 @@ public class GroupHelper extends HelperBase {
         initGroupCreating();
         fillGroupForm(group);
     submitGroupCreating();
+        groupCashe=null;
         returnGroupPage();
     }
     public void modify(int index, GroupDate group) {
@@ -88,6 +89,7 @@ public class GroupHelper extends HelperBase {
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
+        groupCashe=null;
         returnGroupPage();
     }
     public void delete(int index) {
@@ -99,6 +101,7 @@ public class GroupHelper extends HelperBase {
     public void delete(GroupDate group) {
         selectGroupById(group.getId());
         deleteSelectedGroups();
+        groupCashe=null;
         returnGroupPage();
     }
 
@@ -119,15 +122,20 @@ public class GroupHelper extends HelperBase {
         }
         return groups;
     }
+
+    private Groups groupCashe =null;
     public Groups all() {
-        Groups groups=new Groups();
+        if (groupCashe != null){
+            return new Groups(groupCashe);
+        }
+        groupCashe=new Groups();
         List<WebElement> elements=wd.findElements(By.cssSelector("span.group"));
         for (WebElement l: elements){
             String name=l.getText();
             int id=Integer.parseInt(l.findElement(By.tagName("input")).getAttribute("value"));
-            groups.add(new GroupDate().withId(id).withGroupName(name));
+            groupCashe.add(new GroupDate().withId(id).withGroupName(name));
         }
-        return groups;
+        return new Groups(groupCashe);
     }
 
 
