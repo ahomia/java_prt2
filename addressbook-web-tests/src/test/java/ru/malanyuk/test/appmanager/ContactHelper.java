@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import ru.malanyuk.test.model.ContactData;
+import ru.malanyuk.test.model.Contacts;
 import ru.malanyuk.test.model.GroupDate;
 
 import java.util.ArrayList;
@@ -134,9 +135,9 @@ public class ContactHelper extends HelperBase{
         }
         return contact;
     }
-    public Set<ContactData> all() {
+    public Contacts all() {
         //WebElement selected = wait.until(presenceOfElementLocated(By.name("entry")));
-        Set<ContactData> contact=new HashSet<ContactData>();
+        Contacts contact=new Contacts();
         List<WebElement> elements=wd.findElements(By.xpath(".//*[@name='entry']"));;
         for (WebElement element: elements){
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));

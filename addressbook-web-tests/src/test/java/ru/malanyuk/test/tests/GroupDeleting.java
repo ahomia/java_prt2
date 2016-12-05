@@ -1,12 +1,18 @@
 package ru.malanyuk.test.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.malanyuk.test.model.GroupDate;
+import ru.malanyuk.test.model.Groups;
 
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 public class GroupDeleting extends TestBase{
     @BeforeMethod
@@ -20,13 +26,15 @@ public class GroupDeleting extends TestBase{
 
     @Test
     public void GroupDeleting() {
-        Set<GroupDate> before=app.group().all();
+       Groups before=app.group().all();
         GroupDate deletedGroup=before.iterator().next();
         app.group().delete(deletedGroup);
-        Set<GroupDate> after=app.group().all();
+        Groups after=app.group().all();
+        assertThat(after.size(), equalTo(before.size()-1));
+        //before.remove(deletedGroup);
+        assertThat(after, equalTo(
+                before.without(deletedGroup)));
 
-        before.remove(deletedGroup);
-            Assert.assertEquals(before,after);
 
 
 

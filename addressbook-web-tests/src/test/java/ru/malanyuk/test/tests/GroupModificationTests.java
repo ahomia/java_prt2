@@ -1,13 +1,19 @@
 package ru.malanyuk.test.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.malanyuk.test.model.GroupDate;
+import ru.malanyuk.test.model.Groups;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.*;
 
 /**
  * Created by ahomia on 14.11.2016.
@@ -23,18 +29,19 @@ public class GroupModificationTests extends TestBase {
     }
     @Test
     public void testGroupModification() {
-        Set<GroupDate> before=app.group().all();
+        Groups before=app.group().all();
         GroupDate modifyGroup=before.iterator().next();
         GroupDate group=new GroupDate().withId(modifyGroup.getId()).withGroupName("malanyuk").withHeader( "mama").withFooter("mama2");
         app.group().modify(group);
-        Set<GroupDate> after=app.group().all();
-        Assert.assertEquals(after.size(),before.size());
-        before.remove(modifyGroup);
-        before.add(group);
+        Groups  after=app.group().all();
+        assertThat(after.size(),equalTo(before.size()));
+        //before.remove(modifyGroup);
+        //before.add(group);
        /* Comparator<? super GroupDate> byId=(g1, g2)->Integer.compare(g1.getId(),g2.getId());
         before.sort(byId);
         after.sort(byId);*/
-        Assert.assertEquals(after,before);
+        assertThat(after, equalTo(before.without(modifyGroup).withAdded(group)));
+
     }
 
 
