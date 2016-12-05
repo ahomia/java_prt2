@@ -40,7 +40,6 @@ public class GroupDate {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,16 +47,17 @@ public class GroupDate {
 
         GroupDate groupDate = (GroupDate) o;
 
+        if (id != groupDate.id) return false;
         return groupName != null ? groupName.equals(groupDate.groupName) : groupDate.groupName == null;
 
     }
 
     @Override
     public int hashCode() {
-        return groupName != null ? groupName.hashCode() : 0;
+        int result = groupName != null ? groupName.hashCode() : 0;
+        result = 31 * result + id;
+        return result;
     }
-
-
 
     public String getGroupName() {
         return groupName;

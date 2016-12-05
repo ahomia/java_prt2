@@ -6,6 +6,7 @@ import ru.malanyuk.test.model.GroupDate;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class GropsCreating extends TestBase {
 
@@ -13,15 +14,17 @@ public class GropsCreating extends TestBase {
     public void testGropsCreating() {
 
         app.goTo().GroupPage();
-        List<GroupDate> before=app.group().list();
+        Set<GroupDate> before=app.group().all();
         GroupDate group=new GroupDate().withGroupName("malanyuk").withHeader( "mama").withFooter("mama2");
         app.group().create(group);
-        List<GroupDate> after=app.group().list();
+        Set<GroupDate> after=app.group().all();
         Assert.assertEquals(after.size(),before.size()+1);
-        before.add(group);
-        Comparator<? super GroupDate> byId=(g1,g2)->Integer.compare(g1.getId(),g2.getId());
+
+       /* Comparator<? super GroupDate> byId=(g1,g2)->Integer.compare(g1.getId(),g2.getId());
         before.sort(byId);
-        after.sort(byId);
+        after.sort(byId);*/
+       group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt());
+        before.add(group);
         Assert.assertEquals(before,after);
 
     }

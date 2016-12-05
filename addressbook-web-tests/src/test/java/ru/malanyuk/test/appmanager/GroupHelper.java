@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import ru.malanyuk.test.model.GroupDate;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by ahomia on 12.11.2016.
@@ -45,11 +47,14 @@ public class GroupHelper extends HelperBase {
     }
 
     public void selectGroup(int index) {
-wd.findElements(By.name("selected[]")).get(index).click();
+        wd.findElements(By.name("selected[]")).get(index).click();
        // click(By.name("selected[]"));
     }
 
+    public void selectGroupById(int id) {
+        wd.findElement(By.cssSelector("input[value='"+id+"']")).click();
 
+    }
     public void initGroupModification() {
         
         click(By.name("edit"));
@@ -77,11 +82,26 @@ wd.findElements(By.name("selected[]")).get(index).click();
         submitGroupModification();
         returnGroupPage();
     }
+    public void modify(GroupDate group) {
+        selectGroupById(group.getId());
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        returnGroupPage();
+    }
     public void delete(int index) {
       selectGroup(index);
         deleteSelectedGroups();
        returnGroupPage();
     }
+
+    public void delete(GroupDate group) {
+        selectGroupById(group.getId());
+        deleteSelectedGroups();
+        returnGroupPage();
+    }
+
+
 
 
     public int getGroupCount() {
@@ -94,9 +114,21 @@ wd.findElements(By.name("selected[]")).get(index).click();
         for (WebElement l: elements){
             String name=l.getText();
             int id=Integer.parseInt(l.findElement(By.tagName("input")).getAttribute("value"));
-            GroupDate group=new GroupDate(id,name,null,null);
-            groups.add(group);
+            groups.add(new GroupDate().withId(id).withGroupName(name));
         }
         return groups;
     }
+    public Set<GroupDate> all() {
+        Set<GroupDate> groups=new HashSet<GroupDate>();
+        List<WebElement> elements=wd.findElements(By.cssSelector("span.group"));
+        for (WebElement l: elements){
+            String name=l.getText();
+            int id=Integer.parseInt(l.findElement(By.tagName("input")).getAttribute("value"));
+            groups.add(new GroupDate().withId(id).withGroupName(name));
+        }
+        return groups;
+    }
+
+
+
 }
