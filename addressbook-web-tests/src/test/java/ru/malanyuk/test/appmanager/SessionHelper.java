@@ -7,14 +7,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 /**
  * Created by ahomia on 13.11.2016.
  */
-public class SessionHelper extends HelperBase{
+public class SessionHelper extends HelperBase {
     private WebDriver wd;
+
     public SessionHelper(WebDriver wd) {
-        super (wd);
+        super(wd);
     }
+
     public void login(String username, String password) {
-        type(By.name("user"),username);
-        type(By.name("pass"),password);
+        type(By.name("user"), username);
+        type(By.name("pass"), password);
         click(By.xpath("//form[@id='LoginForm']/input[3]"));
     }
 

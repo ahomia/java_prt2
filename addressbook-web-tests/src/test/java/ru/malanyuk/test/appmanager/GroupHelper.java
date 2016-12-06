@@ -32,37 +32,38 @@ public class GroupHelper extends HelperBase {
     }
 
     public void fillGroupForm(GroupDate groupDate) {
-        type(By.name("group_name"),groupDate.getGroupName());
-        type(By.name("group_footer"),groupDate.getFooter());
+        type(By.name("group_name"), groupDate.getGroupName());
+        type(By.name("group_footer"), groupDate.getFooter());
 
     }
 
     public void initGroupCreating() {
-        
+
         click(By.name("new"));
     }
 
     public void deleteSelectedGroups() {
-        
+
         click(By.xpath("//div[@id='content']/form/input[5]"));
     }
 
     public void selectGroup(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
-       // click(By.name("selected[]"));
+        // click(By.name("selected[]"));
     }
 
     public void selectGroupById(int id) {
-        wd.findElement(By.cssSelector("input[value='"+id+"']")).click();
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
 
     }
+
     public void initGroupModification() {
-        
+
         click(By.name("edit"));
     }
 
     public void submitGroupModification() {
-        
+
         click(By.name("update"));
     }
 
@@ -73,39 +74,40 @@ public class GroupHelper extends HelperBase {
     public void create(GroupDate group) {
         initGroupCreating();
         fillGroupForm(group);
-    submitGroupCreating();
-        groupCashe=null;
+        submitGroupCreating();
+        groupCashe = null;
         returnGroupPage();
     }
+
     public void modify(int index, GroupDate group) {
         selectGroup(index);
         initGroupModification();
-       fillGroupForm(group);
+        fillGroupForm(group);
         submitGroupModification();
         returnGroupPage();
     }
+
     public void modify(GroupDate group) {
         selectGroupById(group.getId());
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
-        groupCashe=null;
+        groupCashe = null;
         returnGroupPage();
     }
+
     public void delete(int index) {
-      selectGroup(index);
+        selectGroup(index);
         deleteSelectedGroups();
-       returnGroupPage();
+        returnGroupPage();
     }
 
     public void delete(GroupDate group) {
         selectGroupById(group.getId());
         deleteSelectedGroups();
-        groupCashe=null;
+        groupCashe = null;
         returnGroupPage();
     }
-
-
 
 
     public int count() {
@@ -113,31 +115,31 @@ public class GroupHelper extends HelperBase {
     }
 
     public List<GroupDate> list() {
-        List<GroupDate> groups=new ArrayList<GroupDate>();
-        List<WebElement> elements=wd.findElements(By.cssSelector("span.group"));
-        for (WebElement l: elements){
-            String name=l.getText();
-            int id=Integer.parseInt(l.findElement(By.tagName("input")).getAttribute("value"));
+        List<GroupDate> groups = new ArrayList<GroupDate>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement l : elements) {
+            String name = l.getText();
+            int id = Integer.parseInt(l.findElement(By.tagName("input")).getAttribute("value"));
             groups.add(new GroupDate().withId(id).withGroupName(name));
         }
         return groups;
     }
 
-    private Groups groupCashe =null;
+    private Groups groupCashe = null;
+
     public Groups all() {
-        if (groupCashe != null){
+        if (groupCashe != null) {
             return new Groups(groupCashe);
         }
-        groupCashe=new Groups();
-        List<WebElement> elements=wd.findElements(By.cssSelector("span.group"));
-        for (WebElement l: elements){
-            String name=l.getText();
-            int id=Integer.parseInt(l.findElement(By.tagName("input")).getAttribute("value"));
+        groupCashe = new Groups();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement l : elements) {
+            String name = l.getText();
+            int id = Integer.parseInt(l.findElement(By.tagName("input")).getAttribute("value"));
             groupCashe.add(new GroupDate().withId(id).withGroupName(name));
         }
         return new Groups(groupCashe);
     }
-
 
 
 }

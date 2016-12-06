@@ -14,10 +14,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by ahomia on 12.11.2016.
  */
-public class ApplicationManager  {
+public class ApplicationManager {
     WebDriver wd;
     private ContactHelper contactHelper;
-    private GroupHelper groupHelper ;
+    private GroupHelper groupHelper;
     private NavigationHelper navigationHelper;
     private SessionHelper sessionHelper;
     private String browser;
@@ -28,23 +28,22 @@ public class ApplicationManager  {
 
 
     public void init() {
-        if (browser.equals(BrowserType.FIREFOX)){
+        if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
-        }else if(browser.equals(BrowserType.CHROME)){
+        } else if (browser.equals(BrowserType.CHROME)) {
             wd = new ChromeDriver();
-        }else if(browser.equals(BrowserType.IE)){
-            wd= new InternetExplorerDriver();
+        } else if (browser.equals(BrowserType.IE)) {
+            wd = new InternetExplorerDriver();
         }
 
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
-        groupHelper=new GroupHelper(wd);
-        contactHelper=new ContactHelper(wd);
-        navigationHelper=new NavigationHelper(wd);
-        sessionHelper=new SessionHelper(wd);
+        groupHelper = new GroupHelper(wd);
+        contactHelper = new ContactHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
+        sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
     }
-
 
 
     public void stop() {
@@ -59,7 +58,8 @@ public class ApplicationManager  {
     public ContactHelper contact() {
         return contactHelper;
     }
-    public NavigationHelper goTo(){
+
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 }

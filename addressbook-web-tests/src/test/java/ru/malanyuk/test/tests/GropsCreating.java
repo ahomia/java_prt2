@@ -20,18 +20,18 @@ public class GropsCreating extends TestBase {
     public void testGropsCreating() {
 
         app.goTo().GroupPage();
-        Groups before=app.group().all();
-        GroupDate group=new GroupDate().withGroupName("malanyuk").withHeader( "mama").withFooter("mama2");
+        Groups before = app.group().all();
+        GroupDate group = new GroupDate().withGroupName("malanyuk").withHeader("mama").withFooter("mama2");
         app.group().create(group);
-        assertThat(app.group().count(),equalTo(before.size()+1));
-        Groups after=app.group().all();
+        assertThat(app.group().count(), equalTo(before.size() + 1));
+        Groups after = app.group().all();
        /* Comparator<? super GroupDate> byId=(g1,g2)->Integer.compare(g1.getId(),g2.getId());
         before.sort(byId);
         after.sort(byId);*/
-       group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt());
-       // before.add(group);
+        group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
+        // before.add(group);
         assertThat(after, equalTo(
-                before.withAdded(group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
+                before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
     }
 

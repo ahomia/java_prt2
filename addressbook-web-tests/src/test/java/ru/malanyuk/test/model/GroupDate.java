@@ -3,15 +3,16 @@ package ru.malanyuk.test.model;
 public class GroupDate {
 
 
-    private  String groupName;
-    private  String header;
-    private  String footer;
-    private int id=Integer.MAX_VALUE;
+    private String groupName;
+    private String header;
+    private String footer;
+    private int id = Integer.MAX_VALUE;
 
     public GroupDate withId(int id) {
         this.id = id;
         return this;
     }
+
     public GroupDate withGroupName(String groupName) {
         this.groupName = groupName;
         return this;

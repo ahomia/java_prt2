@@ -13,11 +13,11 @@ public class Groups extends ForwardingSet<GroupDate> {
     private Set<GroupDate> delegate;
 
     public Groups(Groups groups) {
-        this.delegate=new HashSet<GroupDate>(groups.delegate());
+        this.delegate = new HashSet<GroupDate>(groups.delegate());
     }
 
     public Groups() {
-        this.delegate=new HashSet<GroupDate>();
+        this.delegate = new HashSet<GroupDate>();
     }
 
     @Override
@@ -25,13 +25,14 @@ public class Groups extends ForwardingSet<GroupDate> {
         return delegate;
     }
 
-    public Groups withAdded(GroupDate group){
-        Groups groups=new Groups(this);
+    public Groups withAdded(GroupDate group) {
+        Groups groups = new Groups(this);
         groups.add(group);
         return groups;
     }
-    public Groups without(GroupDate group){
-        Groups groups=new Groups(this);
+
+    public Groups without(GroupDate group) {
+        Groups groups = new Groups(this);
         groups.remove(group);
         return groups;
     }
