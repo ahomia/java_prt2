@@ -23,9 +23,8 @@ public class GropsCreating extends TestBase {
         Groups before=app.group().all();
         GroupDate group=new GroupDate().withGroupName("malanyuk").withHeader( "mama").withFooter("mama2");
         app.group().create(group);
+        assertThat(app.group().count(),equalTo(before.size()+1));
         Groups after=app.group().all();
-        assertThat(after.size(),equalTo(before.size()+1));
-
        /* Comparator<? super GroupDate> byId=(g1,g2)->Integer.compare(g1.getId(),g2.getId());
         before.sort(byId);
         after.sort(byId);*/
