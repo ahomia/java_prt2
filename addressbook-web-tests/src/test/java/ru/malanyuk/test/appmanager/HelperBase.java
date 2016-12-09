@@ -10,6 +10,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+
 /**
  * Created by ahomia on 13.11.2016.
  */
@@ -34,7 +36,7 @@ public class HelperBase {
      }
  */
     public void type(By locator, String text) {
-
+        click(locator);
         if (text != null) {
             WebElement element = wd.findElement(locator);
             String existingText = element.getAttribute("value");
@@ -44,7 +46,11 @@ public class HelperBase {
             }
         }
     }
-
+    public void attach(By locator, File file) {
+        if (file != null) {
+            wd.findElement(locator).sendKeys(file.getAbsolutePath());
+        }
+    }
     public void click(By locator) {
         wd.findElement(locator).click();
     }
