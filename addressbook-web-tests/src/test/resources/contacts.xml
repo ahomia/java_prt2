@@ -1,0 +1,36 @@
+<list>
+  <contact>
+    <firstname>Marina 0</firstname>
+    <lastname>Malaniuk 0</lastname>
+    <nickname>Ahomia</nickname>
+    <company>Artezio</company>
+    <home>123</home>
+    <mobile>89873862557</mobile>
+    <work>321</work>
+    <email>marina.malaniuk@gmail.com</email>
+    <email2>marina.malaniuk2@gmail.com</email2>
+    <email3>marina.malaniuk3@gmail.com</email3>
+    <bithdayDay>3</bithdayDay>
+    <bithdayMounth>January</bithdayMounth>
+    <bithdayYear>1992</bithdayYear>
+    <address>Saratov</address>
+    <photo>src\test\resources\Screenshot_26.png</photo>
+  </contact>
+  <contact>
+    <firstname>Marina 1</firstname>
+    <lastname>Malaniuk 1</lastname>
+    <nickname>Ahomia</nickname>
+    <company>Artezio</company>
+    <home>123</home>
+    <mobile>89873862557</mobile>
+    <work>321</work>
+    <email>marina.malaniuk@gmail.com</email>
+    <email2>marina.malaniuk2@gmail.com</email2>
+    <email3>marina.malaniuk3@gmail.com</email3>
+    <bithdayDay>3</bithdayDay>
+    <bithdayMounth>January</bithdayMounth>
+    <bithdayYear>1992</bithdayYear>
+    <address>Saratov</address>
+    <photo>src\test\resources\Screenshot_26.png</photo>
+  </contact>
+</list>

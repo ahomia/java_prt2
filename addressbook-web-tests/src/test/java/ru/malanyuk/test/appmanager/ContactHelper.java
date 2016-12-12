@@ -167,7 +167,6 @@ public class ContactHelper extends HelperBase {
         //WebElement selected = wait.until(presenceOfElementLocated(By.name("entry")));
         contactCashe = new Contacts();
         List<WebElement> elements = wd.findElements(By.xpath(".//*[@name='entry']"));
-        ;
         for (WebElement element : elements) {
             List<WebElement> cells = wd.findElements(By.tagName("td"));
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));

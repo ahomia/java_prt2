@@ -1,5 +1,6 @@
 package ru.malanyuk.test.tests;
 
+import com.thoughtworks.xstream.XStream;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
@@ -10,6 +11,7 @@ import ru.malanyuk.test.model.Groups;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -17,16 +19,21 @@ import static org.hamcrest.MatcherAssert.*;
 public class GropsCreating extends TestBase {
 @DataProvider
 public Iterator<Object[]> validGroups() throws IOException {
-    List<Object[]> list=new ArrayList<Object[]>();
-    BufferedReader reader=new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+    BufferedReader reader=new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
 String line=reader.readLine();
+    String xml="";
     while (line!=null){
+        xml+=line;
         String[] split=line.split(";");
-        list.add(new Object[]{new GroupDate().withGroupName(split[0]).withHeader(split[1]).withFooter(split[2])});
+        ///list.add(new Object[]{new GroupDate().withGroupName(split[0]).withHeader(split[1]).withFooter(split[2])});
         line=reader.readLine();
     }
+    XStream xstream=new XStream();
+    xstream.processAnnotations(GroupDate.class);
+    List<GroupDate> groups=(List<GroupDate>) xstream.fromXML(xml);
+   return groups.stream().map((g)->new Object[] {g}).collect(Collectors.toList()).iterator();
    // list.add(new Object[]{new GroupDate().withGroupName("malanyuk").withHeader("mama").withFooter("mama2")});
-    return list.iterator();
+    //return list.iterator();
 
 }
     @Test(dataProvider = "validGroups")

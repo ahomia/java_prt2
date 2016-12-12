@@ -3,6 +3,7 @@ package ru.malanyuk.test.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.thoughtworks.xstream.XStream;
 import ru.malanyuk.test.model.GroupDate;
 
 import java.io.File;
@@ -20,6 +21,8 @@ public class GroupDataGenerator {
     public int count;
     @Parameter(names ="-f",description = "Target file")
     public String file;
+    @Parameter(names = "-d",description = "format")
+    public String format;
     
     
     public static void main(String[] args) throws IOException {
@@ -38,10 +41,25 @@ public class GroupDataGenerator {
 
     private void run() throws IOException {
         List<GroupDate> groups= generateGroups(count);
-        save(groups,new File(file));
+        if (format.equals("csv")) {
+            saveAsCSV(groups, new File(file));
+        }else if (format.equals("xml")){
+            saveAsXML(groups, new File(file));
+        }else {
+            System.out.println("Unrecognized format");
+        }
     }
 
-    private void save(List<GroupDate> groups, File file) throws IOException {
+    private void saveAsXML(List<GroupDate> groups, File file) throws IOException {
+        XStream xsrteam=new XStream();
+        xsrteam.processAnnotations(GroupDate.class);
+        String xml = xsrteam.toXML(groups);
+        Writer writer = new FileWriter(file);
+        writer.write(xml);
+        writer.close();
+    }
+
+    private void saveAsCSV(List<GroupDate> groups, File file) throws IOException {
         Writer writer=new FileWriter(file);
         for (GroupDate group:groups){
             writer.write(String.format("%s;%s;%s\n",group.getGroupName(),group.getFooter(),group.getFooter()));

@@ -1,5 +1,6 @@
 package ru.malanyuk.test.tests;
 
+import com.thoughtworks.xstream.XStream;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.*;
@@ -21,19 +23,20 @@ import static org.hamcrest.MatcherAssert.*;
 public class NewContactCreating extends TestBase {
     @DataProvider
     public Iterator<Object[]> validContacts() throws IOException {
-        List<Object[]> list=new ArrayList<Object[]>();
-        BufferedReader reader=new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
+        BufferedReader reader=new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
         String line=reader.readLine();
+        String xml="";
         while (line!=null){
+            xml+=line;
             String[] split=line.split(";");
-            list.add(new Object[]{new ContactData().withFirstname(split[0]).withLastname(split[1]).withNickname(split[2]).
-                    withCompany(split[3]).withHome(split[4]).withMobile(split[5]).withWork(split[6]).withEmail(split[7]).
-                    withBithdayDay(split[8]).withBithdayMounth(split[9]).withBithdayYear(split[10]).withAddress(split[11]).
-                    withEmail2(split[12]).withEmail3(split[13]).withPhoto(new File(split[14]))});
+            ///list.add(new Object[]{new GroupDate().withGroupName(split[0]).withHeader(split[1]).withFooter(split[2])});
             line=reader.readLine();
         }
-        //list.add();
-        return list.iterator();
+        XStream xstream=new XStream();
+        xstream.processAnnotations(ContactData.class);
+        List<ContactData> groups=(List<ContactData>) xstream.fromXML(xml);
+        return groups.stream().map((g)->new Object[] {g}).collect(Collectors.toList()).iterator();
+
 
     }
     @Test(dataProvider = "validContacts")

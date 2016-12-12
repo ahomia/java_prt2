@@ -3,9 +3,9 @@ package ru.malanyuk.test.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
-import org.junit.runners.Parameterized;
+import com.thoughtworks.xstream.XStream;
 import ru.malanyuk.test.model.ContactData;
-import ru.malanyuk.test.model.GroupDate;
+
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,6 +22,8 @@ public class ContactDataGenerator {
     public int count;
     @Parameter(names = "-f", description = "Target file")
     public String file;
+    @Parameter(names = "-d",description = "format")
+    public String format;
 
 
     public static void main(String[] args) throws IOException {
@@ -41,10 +43,26 @@ public class ContactDataGenerator {
 
     private void run() throws IOException {
         List<ContactData> contacts = generateContacts(count);
-        save(contacts, new File(file));
+        if (format.equals("csv")) {
+            saveAsCSV(contacts, new File(file));
+        }else if(format.equals("xml")){
+            saveAsXML(contacts, new File(file));
+
+        }else {
+            System.out.println("Unrecognized format");
+        }
     }
 
-    private void save(List<ContactData> contacts, File file) throws IOException {
+    private void saveAsXML(List<ContactData> contacts, File file) throws IOException {
+        XStream xsrteam=new XStream();
+        xsrteam.processAnnotations(ContactData.class);
+        String xml = xsrteam.toXML(contacts);
+        Writer writer = new FileWriter(file);
+        writer.write(xml);
+        writer.close();
+    }
+
+    private void saveAsCSV(List<ContactData> contacts, File file) throws IOException {
         Writer writer = new FileWriter(file);
         for (ContactData contact : contacts) {
             String f = contact.getPhoto().getAbsolutePath();
