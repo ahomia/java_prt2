@@ -37,9 +37,9 @@ public class ContactDetailsTest extends TestBase {
     }
 
     private String mergeDetails(ContactData contact) {
-        return Arrays.asList(contact.getFirstname(),contact.getLastname()
-                ,contact.getNickname(),contact.getCompany(),contact.getAddress(),contact.getHome()
-                ,contact.getMobile(),contact.getWork(),contact.getEmail(),contact.getEmail2(),contact.getEmail3())
+        return Arrays.asList(contact.getFirstname(), contact.getLastname()
+                , contact.getNickname(), contact.getCompany(), contact.getAddress(), contact.getHome()
+                , contact.getMobile(), contact.getWork(), contact.getEmail(), contact.getEmail2(), contact.getEmail3())
                 .stream().filter((s) -> !s.equals(""))
                 .collect(Collectors.joining("\n"));
     }

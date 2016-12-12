@@ -46,11 +46,13 @@ public class HelperBase {
             }
         }
     }
+
     public void attach(By locator, File file) {
         if (file != null) {
             wd.findElement(locator).sendKeys(file.getAbsolutePath());
         }
     }
+
     public void click(By locator) {
         wd.findElement(locator).click();
     }

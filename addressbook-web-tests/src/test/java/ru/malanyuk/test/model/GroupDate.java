@@ -6,8 +6,8 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 @XStreamAlias("group")
 public class GroupDate {
 
-@XStreamOmitField()
-private int id = Integer.MAX_VALUE;
+    @XStreamOmitField()
+    private int id = Integer.MAX_VALUE;
 
     private String groupName;
     private String header;

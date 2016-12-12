@@ -206,9 +206,9 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", contact.getId()))).click();
         String[] info = wd.findElement(By.id("content")).getText()
                 .replaceAll("\\n+\\s*", "\n").replaceFirst(" ", "\n").split("\n");
-        info[5]=info[5].replaceAll("\\s","").replaceAll("\n","").replaceAll("[:]","").replaceAll("[HMW]","");
-        info[6]=info[6].replaceAll("\\s","").replaceAll("\n","").replaceAll("[:]","").replaceAll("[HMW]","");
-        info[7]=info[7].replaceAll("\\s","").replaceAll("\n","").replaceAll("[:]","").replaceAll("[HMW]","");
+        info[5] = info[5].replaceAll("\\s", "").replaceAll("\n", "").replaceAll("[:]", "").replaceAll("[HMW]", "");
+        info[6] = info[6].replaceAll("\\s", "").replaceAll("\n", "").replaceAll("[:]", "").replaceAll("[HMW]", "");
+        info[7] = info[7].replaceAll("\\s", "").replaceAll("\n", "").replaceAll("[:]", "").replaceAll("[HMW]", "");
         String email = wd.findElement(By.xpath("//div/div[4]/a[1]")).getText();
         String email2 = wd.findElement(By.xpath("//div/div[4]/a[2]")).getText();
         String email3 = wd.findElement(By.xpath("//div/div[4]/a[3]")).getText();
