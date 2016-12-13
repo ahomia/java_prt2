@@ -39,7 +39,7 @@ public class ContactPhoneTests extends TestBase {
 
     }
 
-    private String mergePhones(ContactData contact) {
+    public static String mergePhones(ContactData contact) {
         return Arrays.asList(contact.getHome(), contact.getMobile(), contact.getWork())
                 .stream().filter((s) -> !s.equals("")).
                         map(ContactPhoneTests::cleaned)
