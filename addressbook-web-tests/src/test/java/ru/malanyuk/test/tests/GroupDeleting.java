@@ -19,18 +19,19 @@ public class GroupDeleting extends TestBase {
     public void ensurePreConditions() {
         app.goTo().GroupPage();
 
-        if (app.contact().list().size() == 0) {
+        if (app.db().groups().size() == 0) {
             app.group().create(new GroupDate().withGroupName("malanyuk").withHeader("mama").withFooter("mama2"));
         }
     }
 
     @Test
     public void GroupDeleting() {
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         GroupDate deletedGroup = before.iterator().next();
+        app.goTo().GroupPage();
         app.group().delete(deletedGroup);
         assertThat(app.group().count(), equalTo(before.size() - 1));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
         //before.remove(deletedGroup);
         assertThat(after, equalTo(
                 before.without(deletedGroup)));

@@ -14,21 +14,23 @@ import static org.hamcrest.MatcherAssert.*;
 public class GroupModificationTests extends TestBase {
     @BeforeMethod
     public void ensurePreConditions() {
-        app.goTo().GroupPage();
 
-        if (app.contact().list().size() == 0) {
+
+        if (app.db().groups().size() == 0) {
+            app.goTo().GroupPage();
             app.group().create(new GroupDate().withGroupName("malanyuk").withHeader("mama").withFooter("mama2"));
         }
     }
 
     @Test
     public void testGroupModification() {
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         GroupDate modifyGroup = before.iterator().next();
         GroupDate group = new GroupDate().withId(modifyGroup.getId()).withGroupName("malanyuk").withHeader("mama").withFooter("mama2");
+        app.goTo().GroupPage();
         app.group().modify(group);
         assertThat(app.group().count(), equalTo(before.size()));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
         //before.remove(modifyGroup);
         //before.add(group);
        /* Comparator<? super GroupDate> byId=(g1, g2)->Integer.compare(g1.getId(),g2.getId());

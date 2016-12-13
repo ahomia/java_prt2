@@ -38,12 +38,12 @@ public class NewContactCreating extends TestBase {
     @Test(dataProvider = "validContacts")
     public void NewContactCreating(ContactData contact) {
         app.goTo().HomePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         app.contact().initAddContact();
         app.contact().create(contact);
         // app.goTo().HomePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         //contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(),o2.getId())).get().getId());
        /* Comparator<? super ContactData> byId=(c1, c2)->Integer.compare(c1.getId(),c2.getId());
         before.sort(byId);

@@ -23,6 +23,62 @@ public class ContactData {
     private String firstname;
     @Column(name="lastname")
     private String lastname;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        if (id != that.id) return false;
+        if (bithdayDay != that.bithdayDay) return false;
+        if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
+        if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+        if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
+        if (company != null ? !company.equals(that.company) : that.company != null) return false;
+        if (home != null ? !home.equals(that.home) : that.home != null) return false;
+        if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
+        if (work != null ? !work.equals(that.work) : that.work != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
+        if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
+        if (bithdayMounth != null ? !bithdayMounth.equals(that.bithdayMounth) : that.bithdayMounth != null)
+            return false;
+        if (bithdayYear != null ? !bithdayYear.equals(that.bithdayYear) : that.bithdayYear != null) return false;
+        return address != null ? address.equals(that.address) : that.address == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
+        result = 31 * result + (home != null ? home.hashCode() : 0);
+        result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
+        result = 31 * result + (work != null ? work.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (email2 != null ? email2.hashCode() : 0);
+        result = 31 * result + (email3 != null ? email3.hashCode() : 0);
+        result = 31 * result + (int) bithdayDay;
+        result = 31 * result + (bithdayMounth != null ? bithdayMounth.hashCode() : 0);
+        result = 31 * result + (bithdayYear != null ? bithdayYear.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
+    }
+
     @Column(name="nickname")
     private String nickname;
     @Column(name="company")
@@ -37,15 +93,18 @@ public class ContactData {
     @Type(type = "text")
     private String work;
     @Column(name="email")
+    @Type(type = "text")
     private String email;
     @Column(name="email2")
+    @Type(type = "text")
     private String email2;
     @Column(name="email3")
+    @Type(type = "text")
     private String email3;
     @Column(name="bday")
-    @Type(type = "tinyint")
+    @Type(type = "byte")
     private byte bithdayDay;
-    @Column(name="bmounth")
+    @Column(name="bmonth")
     private String bithdayMounth;
     @Column(name="byear")
     private String bithdayYear;
@@ -164,39 +223,9 @@ public class ContactData {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ContactData that = (ContactData) o;
-
-        if (id != that.id) return false;
-        if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-        return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = firstname != null ? firstname.hashCode() : 0;
-        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-        result = 31 * result + id;
-        return result;
-    }
-
     public ContactData withId(int id) {
         this.id = id;
         return this;
-    }
-
-
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "firstname='" + firstname + '\'' +
-                ", id='" + id + '\'' +
-                '}';
     }
 
 

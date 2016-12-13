@@ -47,10 +47,10 @@ Logger logger= LoggerFactory.getLogger(GropsCreating.class);
     public void testGropsCreating(GroupDate group) {
         logger.info("start GroupCreating test");
         app.goTo().GroupPage();
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         app.group().create(group);
         assertThat(app.group().count(), equalTo(before.size() + 1));
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
        /* Comparator<? super GroupDate> byId=(g1,g2)->Integer.compare(g1.getId(),g2.getId());
         before.sort(byId);
         after.sort(byId);*/
