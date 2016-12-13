@@ -2,38 +2,70 @@ package ru.malanyuk.test.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.File;
 
 @XStreamAlias("contact")
+@Entity
+@javax.persistence.Table(name ="addressbook")
 public class ContactData {
 
     @XStreamOmitField()
+    @Id
+    @Column(name="id")
     private int id = Integer.MAX_VALUE;
+    @Column(name="firstname")
     private String firstname;
+    @Column(name="lastname")
     private String lastname;
+    @Column(name="nickname")
     private String nickname;
+    @Column(name="company")
     private String company;
+    @Column(name="home")
+    @Type(type = "text")
     private String home;
+    @Column(name="mobile")
+    @Type(type = "text")
     private String mobile;
+    @Column(name="work")
+    @Type(type = "text")
     private String work;
+    @Column(name="email")
     private String email;
+    @Column(name="email2")
     private String email2;
+    @Column(name="email3")
     private String email3;
-    private String bithdayDay;
+    @Column(name="bday")
+    @Type(type = "tinyint")
+    private byte bithdayDay;
+    @Column(name="bmounth")
     private String bithdayMounth;
+    @Column(name="byear")
     private String bithdayYear;
+    @Column(name="address")
+    @Type(type = "text")
     private String address;
+    @Transient
     private String allPhones;
+    @Transient
     private String allEmails;
-    private File photo;
+    @Column(name="photo")
+    @Type(type = "text")
+    private String photo;
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
@@ -118,7 +150,7 @@ public class ContactData {
     }
 
     public ContactData withBithdayDay(String bithdayDay) {
-        this.bithdayDay = bithdayDay;
+        this.bithdayDay = Byte.valueOf(bithdayDay);
         return this;
     }
 
@@ -201,7 +233,7 @@ public class ContactData {
     }
 
     public String getBithdayDay() {
-        return bithdayDay;
+        return Byte.toString(bithdayDay);
     }
 
     public String getBithdayMounth() {

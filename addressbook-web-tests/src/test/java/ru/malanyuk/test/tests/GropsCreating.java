@@ -4,6 +4,8 @@ import com.thoughtworks.xstream.XStream;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.malanyuk.test.model.GroupDate;
@@ -17,6 +19,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
 public class GropsCreating extends TestBase {
+Logger logger= LoggerFactory.getLogger(GropsCreating.class);
     @DataProvider
     public Iterator<Object[]> validGroups() throws IOException {
 
@@ -42,6 +45,7 @@ public class GropsCreating extends TestBase {
 
     @Test(dataProvider = "validGroups")
     public void testGropsCreating(GroupDate group) {
+        logger.info("start GroupCreating test");
         app.goTo().GroupPage();
         Groups before = app.group().all();
         app.group().create(group);
@@ -54,6 +58,8 @@ public class GropsCreating extends TestBase {
         // before.add(group);
         assertThat(after, equalTo(
                 before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+        logger.info("stop GroupCreating test");
+
 
     }
 
