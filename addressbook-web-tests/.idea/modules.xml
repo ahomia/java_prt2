@@ -8,6 +8,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ex-3.iml" filepath="$PROJECT_DIR$/.idea/modules/ex-3.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ex-3_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ex-3_main.iml" group="ex-3" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ex-3_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ex-3_test.iml" group="ex-3" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maintis.iml" filepath="$PROJECT_DIR$/.idea/modules/maintis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maintis_main.iml" filepath="$PROJECT_DIR$/.idea/modules/maintis_main.iml" group="maintis" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/maintis_test.iml" filepath="$PROJECT_DIR$/.idea/modules/maintis_test.iml" group="maintis" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox.iml" />
     </modules>
   </component>

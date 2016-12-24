@@ -23,6 +23,8 @@
       <module name="addressbook-web-tests_test" target="1.8" />
       <module name="ex-3_main" target="1.5" />
       <module name="ex-3_test" target="1.5" />
+      <module name="maintis_main" target="1.5" />
+      <module name="maintis_test" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
