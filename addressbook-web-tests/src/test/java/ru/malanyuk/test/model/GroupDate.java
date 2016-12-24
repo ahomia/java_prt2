@@ -11,16 +11,16 @@ import javax.persistence.Id;
 
 @XStreamAlias("group")
 @Entity
-@javax.persistence.Table(name ="group_list")
+@javax.persistence.Table(name = "group_list")
 public class GroupDate {
 
     @XStreamOmitField()
     @Id
-    @Column(name="group_id")
+    @Column(name = "group_id")
     private int id = Integer.MAX_VALUE;
-    @Column(name="group_name")
+    @Column(name = "group_name")
     private String groupName;
-    @Column(name="group_header")
+    @Column(name = "group_header")
     @Type(type = "text")
     private String header;
 
@@ -47,7 +47,7 @@ public class GroupDate {
         return result;
     }
 
-    @Column(name="group_footer")
+    @Column(name = "group_footer")
     @Type(type = "text")
     private String footer;
 

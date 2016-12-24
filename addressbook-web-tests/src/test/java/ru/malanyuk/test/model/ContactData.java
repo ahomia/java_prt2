@@ -1,27 +1,35 @@
 package ru.malanyuk.test.model;
 
+import com.google.common.collect.ForwardingSet;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
-@javax.persistence.Table(name ="addressbook")
+@javax.persistence.Table(name = "addressbook")
 public class ContactData {
 
+    private  Set<ContactData> delegate;
     @XStreamOmitField()
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",joinColumns = @JoinColumn(name = "id"),inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupDate> groups=new HashSet<GroupDate>();
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
-    @Column(name="firstname")
+    @Column(name = "firstname")
     private String firstname;
-    @Column(name="lastname")
+    @Column(name = "lastname")
     private String lastname;
 
     @Override
@@ -79,43 +87,43 @@ public class ContactData {
                 '}';
     }
 
-    @Column(name="nickname")
+    @Column(name = "nickname")
     private String nickname;
-    @Column(name="company")
+    @Column(name = "company")
     private String company;
-    @Column(name="home")
+    @Column(name = "home")
     @Type(type = "text")
     private String home;
-    @Column(name="mobile")
+    @Column(name = "mobile")
     @Type(type = "text")
     private String mobile;
-    @Column(name="work")
+    @Column(name = "work")
     @Type(type = "text")
     private String work;
-    @Column(name="email")
+    @Column(name = "email")
     @Type(type = "text")
     private String email;
-    @Column(name="email2")
+    @Column(name = "email2")
     @Type(type = "text")
     private String email2;
-    @Column(name="email3")
+    @Column(name = "email3")
     @Type(type = "text")
     private String email3;
-    @Column(name="bday")
+    @Column(name = "bday")
     @Type(type = "byte")
     private byte bithdayDay;
-    @Column(name="bmonth")
+    @Column(name = "bmonth")
     private String bithdayMounth;
-    @Column(name="byear")
+    @Column(name = "byear")
     private String bithdayYear;
-    @Column(name="address")
+    @Column(name = "address")
     @Type(type = "text")
     private String address;
     @Transient
     private String allPhones;
     @Transient
     private String allEmails;
-    @Column(name="photo")
+    @Column(name = "photo")
     @Type(type = "text")
     private String photo;
 
@@ -289,4 +297,8 @@ public class ContactData {
         return allEmails;
     }
 
+    public ContactData inGroup(GroupDate group) {
+        groups.add(group);
+        return this;
+    }
 }

@@ -2,6 +2,9 @@ package ru.malanyuk.test.model;
 
 import com.google.common.collect.ForwardingSet;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -17,12 +20,15 @@ public class Groups extends ForwardingSet<GroupDate> {
         this.delegate = new HashSet<GroupDate>(groups.delegate());
     }
 
-    public Groups() {
-        this.delegate = new HashSet<GroupDate>();
-    }
 
     public Groups(Collection<GroupDate> groups) {
         this.delegate = new HashSet<GroupDate>(groups);
+    }
+    @ManyToMany(mappedBy = "groups")
+    private Set<ContactData> contacts=new HashSet<ContactData>();
+
+    public Set<ContactData> getContacts() {
+        return new Contacts(contacts);
     }
 
     @Override

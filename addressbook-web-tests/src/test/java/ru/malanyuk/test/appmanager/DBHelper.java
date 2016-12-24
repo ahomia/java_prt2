@@ -18,27 +18,29 @@ import java.util.List;
 public class DBHelper {
     private final SessionFactory sessionFactory;
 
-    public DBHelper(){
+    public DBHelper() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();
 
-            sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
+        sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 
     }
-    public Groups groups(){
+
+    public Groups groups() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<GroupDate> result = session.createQuery( "from GroupDate").list();
+        List<GroupDate> result = session.createQuery("from GroupDate").list();
 
         session.getTransaction().commit();
         session.close();
         return new Groups(result);
     }
-    public Contacts contacts(){
+
+    public Contacts contacts() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<ContactData> result = session.createQuery( "from ContactData where deprecated ='0000-00-00' ").list();
+        List<ContactData> result = session.createQuery("from ContactData where deprecated ='0000-00-00' ").list();
         session.getTransaction().commit();
         session.close();
         return new Contacts(result);

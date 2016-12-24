@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.internal.Streams;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.malanyuk.test.model.ContactData;
 import ru.malanyuk.test.model.Contacts;
 import ru.malanyuk.test.model.GroupDate;
@@ -43,7 +44,18 @@ public class ContactHelper extends HelperBase {
         selectDropdown(By.xpath("bday"), contactData.getBithdayDay());
         selectDropdown(By.name("bmonth"), contactData.getBithdayMounth());
         type(By.name("byear"), contactData.getBithdayYear());
+        if (creating) {
+            if (contactData.getGroups().size() > 0)
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+            
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getGroupName());
+
+    } else
+
+    {
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
+}
 
 
     public void gotoHomePage() {
@@ -216,5 +228,16 @@ public class ContactHelper extends HelperBase {
         return new ContactData().withId(contact.getId()).withFirstname(info[0]).withLastname(info[1])
                 .withNickname(info[2]).withCompany(info[3]).withAddress(info[4]).withHome(info[5])
                 .withMobile(info[6]).withWork(info[7]).withEmail(email).withEmail2(email2).withEmail3(email3);
+    }
+    public void addContactInGroup(ContactData contact, GroupDate group) {
+        selectContactById(contact.getId());
+        click(By.xpath("//select[@name='to_group']//option[@value='" + group.getId() + "']"));
+        click(By.name("add"));
+    }
+
+    public void deleteContactOffGroup(ContactData contact, GroupDate group) {
+        click(By.xpath("//select[@name='group']//option[@value='" + group.getId() + "']"));
+        selectContactById(contact.getId());
+        click(By.name("remove"));
     }
 }

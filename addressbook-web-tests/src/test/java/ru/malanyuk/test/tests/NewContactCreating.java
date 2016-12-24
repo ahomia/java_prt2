@@ -5,6 +5,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.malanyuk.test.model.ContactData;
 import ru.malanyuk.test.model.Contacts;
+import ru.malanyuk.test.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,6 +38,7 @@ public class NewContactCreating extends TestBase {
 
     @Test(dataProvider = "validContacts")
     public void NewContactCreating(ContactData contact) {
+
         app.goTo().HomePage();
         Contacts before = app.db().contacts();
         app.contact().initAddContact();
@@ -52,6 +54,7 @@ public class NewContactCreating extends TestBase {
         //before.add(contact);
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+        vetifyContactListInUI();
     }
 
 }

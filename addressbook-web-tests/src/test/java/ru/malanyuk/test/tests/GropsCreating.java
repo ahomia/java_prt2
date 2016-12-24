@@ -19,7 +19,8 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
 public class GropsCreating extends TestBase {
-Logger logger= LoggerFactory.getLogger(GropsCreating.class);
+    Logger logger = LoggerFactory.getLogger(GropsCreating.class);
+
     @DataProvider
     public Iterator<Object[]> validGroups() throws IOException {
 
@@ -60,7 +61,7 @@ Logger logger= LoggerFactory.getLogger(GropsCreating.class);
                 before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
         logger.info("stop GroupCreating test");
 
-
+        vetifyGroupListInUI();
     }
 
 }

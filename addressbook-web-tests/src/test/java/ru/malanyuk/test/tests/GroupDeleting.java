@@ -36,7 +36,7 @@ public class GroupDeleting extends TestBase {
         assertThat(after, equalTo(
                 before.without(deletedGroup)));
 
-
+        vetifyGroupListInUI();
     }
 
 
