@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.HttpSessionId;
 
 
 import java.io.FileNotFoundException;
@@ -21,10 +22,8 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
     private final Properties properties;
     WebDriver wd;
-    private NavigationHelper navigationHelper;
-    private SessionHelper sessionHelper;
+
     private String browser;
-    private DBHelper dbHelper;
 
     public ApplicationManager(String browser) {
 
@@ -36,7 +35,7 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(String.format("src/test/resources/%s.properties", target)));
-        dbHelper = new DBHelper();
+
 
         if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
@@ -48,22 +47,11 @@ public class ApplicationManager {
 
         wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wd.get(properties.getProperty("web.baseUrl"));
-        navigationHelper = new NavigationHelper(wd);
-        sessionHelper = new SessionHelper(wd);
-        sessionHelper.login(properties.getProperty("web.baseAdminLogin"), properties.getProperty("web.baseAdminPassword"));
+
     }
 
     public void stop() {
         wd.quit();
     }
 
-
-
-    public NavigationHelper goTo() {
-        return navigationHelper;
-    }
-
-    public DBHelper db() {
-        return dbHelper;
-    }
 }
